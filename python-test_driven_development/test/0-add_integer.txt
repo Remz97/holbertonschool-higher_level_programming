@@ -1,0 +1,78 @@
+"""
+Add two integers together.
+
+This function takes two integers as input and returns their sum.
+
+First import ``add_integer'' from the ``0-add_integer`` file:
+    >>> add_integer = __import__('0-add_integer').add_integer
+
+Parameters:
+    a (int): The first integer to be added.
+    b (int, optional): The second integer to be added. Defaults to 98.
+
+Returns:
+    int: The sum of the two input integers.
+
+Raises:
+    ValueError: If either `a` or `b` is not an integer.
+
+Examples:
+    >>> add_integer(2, 3)
+    5
+
+    >>> add_integer(2, -3)
+    -1
+
+    >>> add_integer(2.0, 3.0)
+    5
+
+    >>> add_integer(2.9, 0.2)
+    2
+
+    >>> add_integer(-2.9, -0.2)
+    -2
+
+    >>> add_integer(2.3, -3)
+    -1
+
+    >>> add_integer(2)
+    100
+
+Error case:
+    >>> add_integer("hello", 3)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+    >>> add_integer(2, "hello")
+    Traceback (most recent call last):
+    TypeError: b must be an integer
+
+    >>> add_integer(None)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+    >>> add_integer(2.3, None)
+    Traceback (most recent call last):
+    TypeError: b must be an integer
+
+    >>> add_integer("hello", "there")
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+    >>> add_integer(float('inf'))
+    Traceback (most recent call last):
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(2, float('inf'))
+    Traceback (most recent call last):
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float('nan'))
+    Traceback (most recent call last):
+    ValueError: cannot convert float NaN to integer
+
+    >>> add_integer(2, float('nan'))
+    Traceback (most recent call last):
+    ValueError: cannot convert float NaN to integer
+
+"""
