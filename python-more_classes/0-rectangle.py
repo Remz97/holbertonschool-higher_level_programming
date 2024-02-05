@@ -1,7 +1,11 @@
 #!/usr/bin/python3
-'''empty class'''
+'''
+empty class
+'''
+
 
 class Rectangle:
-    '''void'''
-
+    '''
+    void
+    '''
     pass
