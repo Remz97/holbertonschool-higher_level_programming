@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
-"""module to append to a file"""
+"""module to convert to json"""
+
+import json
 
 
-def append_write(filename="", text=""):
-    """func to append to a file"""
-    with open(filename, "a", encoding="utf-8") as file:
-        data = file.write(text)
-    return data
+def to_json_string(my_obj):
+    """func to convert to json"""
+    return json.dumps(my_obj)
