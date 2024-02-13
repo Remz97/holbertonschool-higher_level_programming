@@ -33,16 +33,16 @@ class Rectangle(Base):
 
     @property
     def x(self):
-        return self.x
+        return self.__x
 
     @x.setter
     def x(self, value):
-        self.x = value
+        self.__x = value
 
     @property
     def y(self):
-        return self.y
+        return self.__y
 
     @y.setter
     def y(self, value):
-        self.y = value
+        self.__y = value
