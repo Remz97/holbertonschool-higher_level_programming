@@ -24,6 +24,7 @@ class Square(Rectangle):
         self.height = value
 
     def update(self, *args, **kwargs):
+        """ update method """
         attributes = ['id', 'size', 'x', 'y']
         if args:
             for attribute, value in zip(attributes, args):
