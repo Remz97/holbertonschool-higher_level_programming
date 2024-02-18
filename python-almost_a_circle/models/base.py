@@ -1,93 +1,59 @@
 #!/usr/bin/python3
-'''Class Rectangle inherits from Base'''
-from .base import Base
+'''Base class'''
+import json
 
 
-class Rectangle(Base):
-    '''Class Rectangle'''
-    def __init__(self, width, height, x=0, y=0, id=None):
-        super().__init__(id)
-        self.width = width
-        self.height = height
-        self.x = x
-        self.y = y
+class Base:
+    '''Base class'''
+    __nb_objects = 0
 
-    @property
-    def width(self):
-        return self.__width
-
-    @width.setter
-    def width(self, new_width):
-        if not isinstance(new_width, int):
-            raise TypeError("width must be an integer")
-        elif new_width <= 0:
-            raise ValueError("width must be > 0")
-        self.__width = new_width
-
-    @property
-    def height(self):
-        return self.__height
-
-    @height.setter
-    def height(self, new_height):
-        if not isinstance(new_height, int):
-            raise TypeError("height must be an integer")
-        elif new_height <= 0:
-            raise ValueError("height must be > 0")
-        self.__height = new_height
-
-    @property
-    def x(self):
-        return self.__x
-
-    @x.setter
-    def x(self, new_x):
-        if not isinstance(new_x, int):
-            raise TypeError("x must be an integer")
-        elif new_x < 0:
-            raise ValueError("x must be >= 0")
-        self.__x = new_x
-
-    @property
-    def y(self):
-        return self.__y
-
-    @y.setter
-    def y(self, new_y):
-        if not isinstance(new_y, int):
-            raise TypeError("y must be an integer")
-        elif new_y < 0:
-            raise ValueError("y must be >= 0")
-        self.__y = new_y
-
-    def area(self):
-        '''Area of Rectangle'''
-        return self.__width * self.__height
-
-    def display(self):
-        '''Print Rectangle with #'''
-        for _ in range(self.y):
-            print()
-        for _ in range(self.height):
-            print(" " * self.x, end="")
-            print("#" * self.width)
-
-    def __str__(self):
-        '''Display Rectangle'''
-        return (f"[Rectangle] ({self.id}) {self.__x}/{self.__y} - "
-                f"{self.__width}/{self.__height}")
-
-    def update(self, *args, **kwargs):
-        '''Assigns an argument to each attribute'''
-        if len(args) > 0:
-            attributes = ['id', 'width', 'height', 'x', 'y']
-            for i in range(len(args)):
-                setattr(self, attributes[i], args[i])
+    def __init__(self, id=None):
+        if id is not None:
+            self.id = id
         else:
-            for key, value in kwargs.items():
-                setattr(self, key, value)
+            Base.__nb_objects += 1
+            self.id = Base.__nb_objects
 
-    def to_dictionary(self):
-        '''Return the dictionary representation of a square'''
-        return {'x': self.__x, 'width': self.__width, 'id': self.id,
-                'height': self.__height, 'y': self.__y}
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        '''Return the JSON string representation of list_dictionaries'''
+        if list_dictionaries is None or len(list_dictionaries) == 0:
+            return "[]"
+        return json.dumps(list_dictionaries)
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        filename = cls.__name__ + ".json"
+        with open(filename, "w") as file:
+            if list_objs is None:
+                file.write("[]")
+            else:
+                list_dicts = [obj.to_dictionary() for obj in list_objs]
+                file.write(Base.to_json_string(list_dicts))
+
+    @staticmethod
+    def from_json_string(json_string):
+        '''Return the list of the JSON string representation json_string'''
+        if json_string is None or len(json_string) == 0:
+            return []
+        return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        '''Return an instance with all attributes already set'''
+        if cls.__name__ == "Rectangle":
+            new = cls(1, 1)
+        elif cls.__name__ == "Square":
+            new = cls(1)
+        new.update(**dictionary)
+        return new
+
+    @classmethod
+    def load_from_file(cls):
+        filename = cls.__name__ + ".json"
+        try:
+            with open(filename, "r") as file:
+                list_dicts = cls.from_json_string(file.read())
+        except FileNotFoundError:
+            return []
+        return [cls.create(**obj_dict) for obj_dict in list_dicts]
