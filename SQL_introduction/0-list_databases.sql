@@ -1,2 +1,2 @@
 -- list all data
-LIST * FROM MySQL;
+SHOW DATABASES;
