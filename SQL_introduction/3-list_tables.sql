@@ -1,3 +1,3 @@
 -- list all
 
-SELECT * AS 'mysql';
+SHOW TABLES AS 'mysql';
