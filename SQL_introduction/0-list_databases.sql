@@ -1,2 +1,2 @@
--- list all ele
-LIST * FROM MySQL
+-- list all data
+LIST * FROM MySQL;
