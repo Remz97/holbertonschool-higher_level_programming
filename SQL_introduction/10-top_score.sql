@@ -2,4 +2,4 @@
 
 SELECT *
 FROM second_table
-ORDER BY DESC;
+ORDER BY score DESC;
