@@ -1,4 +1,4 @@
 -- update score of bob
-SELECT Bob
+SELECT name
 FROM second_table
-UPDATE second_table SET Bob = 10;
+UPDATE second_table SET 'Bob' = 10;
