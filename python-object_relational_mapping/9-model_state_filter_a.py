@@ -20,4 +20,3 @@ if __name__ == "__main__":
         for element in query:
             print(f"{element.id}: {element.name}")
     session.close()
-    
