@@ -1,31 +1,20 @@
 #!/usr/bin/python3
-"""
-Start link class to table in database
-"""
+"""Prints the State object with the name passed as argument"""
 
-
-import sys
+from sys import argv
+from sqlalchemy import create_engine
 from model_state import Base, State
-from sqlalchemy import (create_engine)
 from sqlalchemy.orm import Session
 
-
 if __name__ == "__main__":
-    eng = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
-                        .format(
-                                sys.argv[1], sys.argv[2], sys.argv[3]),
-                        pool_pre_ping=True
-                        )
-    Base.metadata.create_all(eng)
-
-    session = Session(bind=eng)
-    results = session.query(State.id)\
-                     .where(State.name == sys.argv[4])\
-                     .all()
-
-    if len(results) > 0:
-        for row in results:
-            print(row.id)
-    else:
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost/{}'.format(argv[1], argv[2], argv[3])
+    )
+    Base.metadata.create_all(engine)
+    session = Session(engine)
+    query = session.query(State).filter(State.name == argv[4]).first()
+    if query is None:
         print("Not found")
+    else:
+        print(f"{query.id}")
     session.close()
