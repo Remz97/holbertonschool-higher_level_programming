@@ -18,4 +18,3 @@ if __name__ == "__main__":
     else:
         print(f"{query.id}")
     session.close()
-    
