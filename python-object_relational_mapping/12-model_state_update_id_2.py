@@ -17,4 +17,3 @@ if __name__ == "__main__":
         query.name = "New Mexico"
         session.commit()
     session.close()
-    
