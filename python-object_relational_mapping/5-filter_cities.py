@@ -25,3 +25,4 @@ if __name__ == "__main__":
     print(", ".join([row[0] for row in rows]))
     cur.close()
     db.close()
+    
